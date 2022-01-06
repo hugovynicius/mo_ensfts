@@ -10,21 +10,22 @@ class EmbeddingPCA():
         self.no_of_components = no_of_components
         self.eigen_values = None
         self.eigen_vectors = None
+        self.mean = None
 
         # debug attributes
-        self.name = 'Principle Component Analysis'
-        self.shortname = 'PCA'
+        self.name = 'Embedding Transformation'
+        self.shortname = 'embedding'
 
         self.std = StandardScaler()
         self.pca_sk = PCA(n_components=self.no_of_components)
         self.gamma = gamma
-        self.kpca_sk = KernelPCA(n_components=self.no_of_components, kernel='rbf', gamma=gamma, fit_inverse_transform = True)
+        self.kpca_sk = KernelPCA(n_components=self.no_of_components, kernel='rbf', gamma=self.gamma, fit_inverse_transform = True)
 
     def __str__(self):
         return self.name
 
     def transform(self, x):
-        return np.dot(x - self.mean, self.projection_matrix.T)
+        return np.dot(x - self.mean, self.projection_matrix.T).real
 
     def inverse_transform(self, x):
         return np.dot(x, self.projection_matrix) + self.mean
@@ -45,10 +46,10 @@ class EmbeddingPCA():
         self.explained_variance_ratio = self.explained_variance / self.eigen_values.sum()
 
     def pca_sklearn(self,x):
-        return self.pca_sk.fit_transform(x);
+        return self.pca_sk.fit_transform(x)
 
     def pca_sklearn_inverse(self, x):
-        return self.pca_sk.inverse_transform(x);
+        return self.pca_sk.inverse_transform(x)
 
     def standardization(self, x):
         return self.std.fit_transform(x)
@@ -76,7 +77,7 @@ class EmbeddingPCA():
         return xkpca
 
     def kernel_pca_sklearn(self, x, gamma):
-        #self.kpca_sk = KernelPCA(n_components=self.no_of_components, kernel='rbf', gamma=gamma)
+        #self.kpca_sk = KernelPCA(n_components=self.no_of_components, kernel='rbf', gamma=self.gamma)
         return self.kpca_sk.fit_transform(x)
 
     def kernel_pca_sklearn_inverse(self, x, gamma):
