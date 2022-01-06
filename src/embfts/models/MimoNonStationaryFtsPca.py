@@ -1,10 +1,8 @@
 import numpy as np
 import pandas as pd
-from embedding.EmbeddingPCA import EmbeddingPCA
 from pyFTS.models.nonstationary import partitioners as nspart
 from pyFTS.models.nonstationary import nsfts
-
-from
+from embfts.embedding.EmbeddingPCA import EmbeddingPCA
 
 class MimoNonStationaryFtsPca():
     def __init__(self, num_components_pca, order_fts_model, npart,
@@ -42,7 +40,7 @@ class MimoNonStationaryFtsPca():
                 forecast_model = np.column_stack((forecast_model,mf))
 
         if transformation == 'PCA':
-            forecast = self.inverse_transformation(forecast_model)
+            forecast = self.inverse_kpca_transformation(forecast_model)
         else:
             forecast = self.inverse_kpca_transformation(forecast_model)
 
