@@ -40,7 +40,7 @@ class MimoNonStationaryFtsPca():
                 forecast_model = np.column_stack((forecast_model,mf))
 
         if transformation == 'PCA':
-            forecast = self.inverse_kpca_transformation(forecast_model)
+            forecast = self.inverse_transformation(forecast_model)
         else:
             forecast = self.inverse_kpca_transformation(forecast_model)
 
