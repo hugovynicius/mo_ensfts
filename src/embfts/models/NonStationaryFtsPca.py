@@ -99,12 +99,9 @@ class NonStationaryFtsPca():
     def inverse_transformation(self,data,transformation,columns,target_column):
         data = np.array(data)
         if transformation == 'PCA':
-            #inverse_pca = self.pca.inverse_transform(data.reshape(len(data), 1))
             inverse_pca = self.pca.pca_sklearn_inverse(data.reshape(len(data), 1))
-            #inverse_pca = self.pca.kernel_pca_sklearn_inverse(data.reshape(len(data), 1), self.gamma)
         else:
             inverse_pca = self.pca.kernel_pca_sklearn_inverse(data.reshape(len(data), 1),self.gamma)
-        #inverse_pca = self.pca.kernel_pca_sklearn_inverse(data.reshape(len(data), 1), self.gamma)
         final_result = self.pca.standardization_inverse(inverse_pca)
         df_result = pd.DataFrame(final_result,columns=list(columns))
         return df_result[target_column].values
