@@ -1,0 +1,28 @@
+variable,rmse,mae,mape,r2
+use [kW](t),0.54,0.392,220.216,0.429
+gen [kW](t),0.057,0.045,inf,0.737
+Dishwasher [kW](t),0.164,0.109,inf,0.103
+Furnace 1 [kW](t),0.12,0.086,223.863,0.099
+Furnace 2 [kW](t),0.11,0.081,79.303,0.27
+Home office [kW](t),0.079,0.057,91.195,0.34
+Fridge [kW](t),0.064,0.046,474.711,0.269
+Wine cellar [kW](t),0.046,0.036,236.984,0.123
+Garage door [kW](t),0.014,0.005,36.347,-0.087
+Kitchen 12 [kW](t),0.007,0.004,inf,0.219
+Kitchen 14 [kW](t),0.073,0.039,inf,-0.024
+Kitchen 38 [kW](t),0.0,0.0,inf,-0.333
+Barn [kW](t),0.147,0.077,inf,-0.079
+Well [kW](t),0.137,0.066,inf,-0.141
+Microwave [kW](t),0.093,0.047,inf,-0.088
+Living room [kW](t),0.073,0.055,inf,0.272
+Solar [kW](t),0.057,0.045,inf,0.737
+temperature(t),2.463,1.954,5.0,0.891
+humidity(t),0.061,0.049,8.729,0.844
+visibility(t),0.689,0.526,8.687,0.547
+apparentTemperature(t),2.807,2.213,7.912,0.871
+pressure(t),2.494,2.036,0.201,0.68
+windSpeed(t),1.962,1.548,inf,0.59
+windBearing(t),63.976,50.103,inf,0.477
+precipIntensity(t),0.004,0.003,,0.745
+dewPoint(t),2.552,2.036,9.172,0.713
+precipProbability(t),0.06,0.047,,0.774
