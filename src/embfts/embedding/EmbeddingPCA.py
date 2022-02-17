@@ -54,6 +54,9 @@ class EmbeddingPCA():
     def standardization(self, x):
         return self.std.fit_transform(x)
 
+    def standardization_test(self, x):
+        return self.std.transform(x)
+
     def standardization_inverse(self,x):
         return self.std.inverse_transform(x)
 

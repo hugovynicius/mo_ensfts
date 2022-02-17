@@ -51,13 +51,13 @@ class StatisticsUtil():
                 model_train, pca_train = model.run_train(ttrain,transformation)
                 y_test = ttest[target_col_train].values
                 forecast, data_test = model.run_test_target(y_test, steps_ahead)
-                # ttest_test = ttest.loc[:, first_col_train:last_col_train]
-                # forecast = model.run_test(ttest_test,transformation,target_col_train,steps_ahead)
+                #ttest_test = ttest.loc[:, first_col_train:last_col_train]
+                #forecast = model.run_test(ttest_test,transformation,target_col_train,steps_ahead)
 
                 y_validation = ttest[target_col_test].values
 
-                y_validation = y_validation[:len(y_validation) - 1]
-                forecast = forecast[1:]
+                # y_validation = y_validation[:len(y_validation) - 1]
+                # forecast = forecast[1:]
 
                 result = self.metricsUtil.compute_all_metrics(y_validation, forecast, result)
 

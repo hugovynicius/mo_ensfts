@@ -58,23 +58,32 @@ class NonStationaryFtsPca():
     def run_test_target(self, data,steps_ahead):
         #data = self.pca.standardization(data.reshape(-1, 1))
         forecast = self.forecast(self.prepare_data(data),steps_ahead)
-        #forecast = self.pca.standardization_inverse(forecast)
         return forecast, data
 
-    def create_non_stationary(self,data):
+    def create_non_stationary(self, data):
+        from pyFTS.common import Transformations
+        tdiff = Transformations.Differential(1)
+        boxcox = Transformations.BoxCox(1)
+
         nsfs = nspart.simplenonstationary_gridpartitioner_builder(data=data, npart=self.npart, transformation=None)
-        self.model = nsfts.NonStationaryFTS(partitioner=nsfs, order=self.order_fts_model, memory_window = self.memory_window_error)
-        #self.model = nsfts.WeightedNonStationaryFTS(partitioner=nsfs, order=self.order_fts_model)
+        # self.model = nsfts.NonStationaryFTS(partitioner=nsfs, order=self.order_fts_model,
+        #                                     memory_window=self.memory_window_error, window_size=0, no_update=True,
+        #                                     method='conditional',time_displacement = 3)
+
+        self.model = nsfts.NonStationaryFTS(partitioner=nsfs, order=self.order_fts_model,
+                                            memory_window=self.memory_window_error)
+        # self.model = nsfts.WeightedNonStationaryFTS(partitioner=nsfs, order=self.order_fts_model,memory_window = self.memory_window_error)
 
     def fit(self,data):
         self.model.fit(data)
 
     def forecast(self,data,steps_ahead):
-        forecast = self.model.predict(data,steps_ahead=steps_ahead)
+        #forecast = self.model.predict(data,steps_ahead=steps_ahead)
+        forecast = self.model.forecast(data, steps_ahead=steps_ahead)
         return forecast
 
     def create_components(self,data,transformation):
-        transformed = self.pca.standardization(data)
+        transformed = data #self.pca.standardization(data)
         if transformation == 'PCA':
             x_std = self.pca.pca_sklearn(transformed)
             # self.pca.fit(transformed)

@@ -27,13 +27,13 @@ class MimoNonStationaryFtsPca():
         if transformation == 'PCA':
             pca_test = self.create_pca_components(data)
         else:
-            pca_test = self.create_kernel_pca_components(data)
+            pca_test = self.create_kernel_pca_components_test(data)
 
         components = pca_test.columns
         forecast_model = []
 
         for i in range(0, self.num_components_pca):
-            mf = models[i].predict(pca_test.loc[:,components[i]], steps_ahead=steps_ahead)
+            mf = models[i].forecast(pca_test.loc[:,components[i]], steps_ahead=steps_ahead)
             if (i == 0):
                 forecast_model = mf
             else:
@@ -69,7 +69,7 @@ class MimoNonStationaryFtsPca():
         nsfs = nspart.simplenonstationary_gridpartitioner_builder(data=data, npart=self.npart,
                                                                   transformation=None)
         model = nsfts.NonStationaryFTS(partitioner=nsfs, order=self.order_fts_model,
-                                            memory_window = self.memory_window_error)
+                                            memory_window = self.memory_window_error,window_size = 3)
 
         return model
 
@@ -91,6 +91,17 @@ class MimoNonStationaryFtsPca():
 
     def create_kernel_pca_components(self,data):
         transformed = self.pca.standardization(data)
+        x_std = self.pca.kernel_pca_sklearn(transformed,self.gamma)
+
+        components = []
+        for i in range(0, self.num_components_pca):
+            components.append('C' + str(i))
+
+        df_kpca = pd.DataFrame(x_std, columns=list(components))
+        return df_kpca
+
+    def create_kernel_pca_components_test(self,data):
+        transformed = self.pca.standardization_test(data)
         x_std = self.pca.kernel_pca_sklearn(transformed,self.gamma)
 
         components = []
