@@ -2,6 +2,7 @@
 
 This repository provides the source code and experimental setup for the paper accepted in the Neural Computing and Applications journal.
 
+For any questions, please feel free to contact Hugo Bitencourt at hugovynicius@gmail.com or hugovynicius@ufmg.br.
 
 ## Paper's abstract 
 
