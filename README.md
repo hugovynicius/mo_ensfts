@@ -39,3 +39,16 @@ numpages = {14},
 keywords = {Multivariate time series, Embedding transformation, Fuzzy time series, Internet of things, Time series forecasting}
 }
 ```
+
+This research contributes to my Ph.D thesis in Computational Intelligence. 
+
+
+```
+@article{paula2025embedding,
+  title={Embedding Fuzzy Time Series: a framework for high-dimensional time series forecasting in IoT applications},
+  author={Paula, Hugo Vinicius Bitencourt and others},
+  year={2025},
+  publisher={Universidade Federal de Minas Gerais}
+}
+```
+
